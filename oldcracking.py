@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -9,17 +8,19 @@ import hashlib
 import requests
 import threading
 
-KEY_FILE = ".device_key.txt"
+HOME_DIR = os.path.expanduser("~")
+KEY_FILE = os.path.join(HOME_DIR, ".permanent_device_key.txt")
 
 def get_permanent_device_id():
     if os.path.exists(KEY_FILE):
         try:
             with open(KEY_FILE, "r") as f:
                 saved_key = f.read().strip()
-                if saved_key:
+                if len(saved_key) == 16:
                     return saved_key
         except Exception:
             pass
+
     device_raw_id = ""
 
     try:
@@ -31,7 +32,7 @@ def get_permanent_device_id():
         pass
 
     if not device_raw_id:
-        device_raw_id = str(uuid.getnode())
+        device_raw_id = str(uuid.uuid4())
 
     permanent_key = hashlib.sha256(device_raw_id.encode()).hexdigest()[:16].upper()
 
@@ -61,7 +62,6 @@ def fetch_allowed_ids(url):
         api_result["error"] = e
 
 def check_access():
-    # RAW_GITHUB_URL = "https://github.com/zarar3082-png/EmonCrack/blob/main/.gitignore"
     RAW_GITHUB_URL = "https://raw.githubusercontent.com/zarar3082-png/EmonCrack/main/.gitignore"
 
     user_id = get_permanent_device_id()
@@ -130,14 +130,12 @@ import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# Global variables
 method = []
 oks = []
 cps = []
 loop = 0
 user = []
 
-# Terminal Color Codes
 X = '\x1b[1;37m'  # White
 rad = '\x1b[38;5;196m'  # Red
 G = '\x1b[38;5;46m'  # Green
