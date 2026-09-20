@@ -1,3 +1,4 @@
+
 import os
 import sys
 import time
@@ -8,7 +9,17 @@ import hashlib
 import requests
 import threading
 
+KEY_FILE = ".device_key.txt"
+
 def get_permanent_device_id():
+    if os.path.exists(KEY_FILE):
+        try:
+            with open(KEY_FILE, "r") as f:
+                saved_key = f.read().strip()
+                if saved_key:
+                    return saved_key
+        except Exception:
+            pass
     device_raw_id = ""
 
     try:
@@ -23,6 +34,13 @@ def get_permanent_device_id():
         device_raw_id = str(uuid.getnode())
 
     permanent_key = hashlib.sha256(device_raw_id.encode()).hexdigest()[:16].upper()
+
+    try:
+        with open(KEY_FILE, "w") as f:
+            f.write(permanent_key)
+    except Exception:
+        pass
+
     return permanent_key
 
 api_result = {"response": None, "error": None}
