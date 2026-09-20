@@ -59,7 +59,8 @@ def fetch_allowed_ids(url):
 # 3. Security Check Function with Loading & Redirect
 # ----------------------------------------------------------------------------------------------
 def check_access():
-    RAW_GITHUB_URL = "https://github.com/zarar3082-png/EmonCrack/blob/main/.gitignore"
+    # RAW_GITHUB_URL = "https://github.com/zarar3082-png/EmonCrack/blob/main/.gitignore"
+    RAW_GITHUB_URL = "https://raw.githubusercontent.com/zarar3082-png/EmonCrack/main/.gitignore"
 
     user_id = get_permanent_device_id()
     os.system("clear")
