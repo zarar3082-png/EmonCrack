@@ -1,7 +1,3 @@
-# ==============================================================================================
-# -------------------- This is a script for cloning Facebook ID --------------------------------
-# ==============================================================================================
-
 import os
 import sys
 import time
@@ -12,10 +8,6 @@ import hashlib
 import requests
 import threading
 
-
-# ----------------------------------------------------------------------------------------------
-# 1. Permanent Device Key Function
-# ----------------------------------------------------------------------------------------------
 def get_permanent_device_id():
     device_raw_id = ""
 
@@ -33,10 +25,6 @@ def get_permanent_device_id():
     permanent_key = hashlib.sha256(device_raw_id.encode()).hexdigest()[:16].upper()
     return permanent_key
 
-
-# ----------------------------------------------------------------------------------------------
-# 2. Background Data Fetching Variables & Function
-# ----------------------------------------------------------------------------------------------
 api_result = {"response": None, "error": None}
 
 
@@ -54,10 +42,6 @@ def fetch_allowed_ids(url):
     except Exception as e:
         api_result["error"] = e
 
-
-# ----------------------------------------------------------------------------------------------
-# 3. Security Check Function with Loading & Redirect
-# ----------------------------------------------------------------------------------------------
 def check_access():
     # RAW_GITHUB_URL = "https://github.com/zarar3082-png/EmonCrack/blob/main/.gitignore"
     RAW_GITHUB_URL = "https://raw.githubusercontent.com/zarar3082-png/EmonCrack/main/.gitignore"
@@ -116,12 +100,6 @@ def check_access():
     else:
         print("\033[1;31m[-] Server error! Could not check license.\033[0m")
         sys.exit()
-
-
-# ==========================================
-# Main Code Imports & Functions
-# ==========================================
-
 import re
 import random
 import string
@@ -492,14 +470,8 @@ def login_2(uid):
 
     loop += 1
 
-
-# ==========================================
-# Execution Start
-# ==========================================
 check_access()
 
 print("\033[1;32m[+] And Welcome to EmonCrack Tools.....\033[0m")
 input("\033[1;36m \n To Start Cloning Please click [↩] Enter--\033[0m")
-
-# Enter দেওয়ার সাথে সাথে মেনু ওপেন হবে
 BNG_71_()
