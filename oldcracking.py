@@ -140,7 +140,7 @@ def banner():
     clear_screen()
     print(f"""{Y}
 ==================================================
-            🔥 EmonCracker 🔥             
+              🔥 EmonCracker 🔥             
 ==================================================
 
       Tool Name : EmonCracker
